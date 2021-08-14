@@ -7,6 +7,10 @@ I created this project mainly because I wanted to:
 - practice what I'm learning about React
 - having a custom solution for me to track my own goals
 
+The following image shows a bit about how this app should look like while it's being developed:
+
+![Concept of the app](docs/northtrack.png?raw=true)
+
 ## Running the application
 
 In the project directory, you can run: `yarn start`
