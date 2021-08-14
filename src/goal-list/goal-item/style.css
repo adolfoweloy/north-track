@@ -1,11 +1,29 @@
 article.goal-item {
     display: flex;
+    flex-direction: column;
+}
+
+article > p {
+    margin: 0;
+}
+
+article > p:first-child {
+    display: flex;
     align-items: center;
     min-height: 4em;
     padding: 0.5em;
     border-bottom: 1px solid lightsteelblue;
+    background-color: lightsteelblue;
 }
 
-article > label {
+article > p > label {
     flex: 1;
+}
+
+article > p.opened {
+    display: none;
+}
+
+article > p.closed {
+    display: block;
 }
