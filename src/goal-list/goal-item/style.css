@@ -1,0 +1,11 @@
+article.goal-item {
+    display: flex;
+    align-items: center;
+    min-height: 4em;
+    padding: 0.5em;
+    border-bottom: 1px solid lightsteelblue;
+}
+
+article > label {
+    flex: 1;
+}

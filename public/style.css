@@ -1,0 +1,19 @@
+header {
+    background-color: #ccc;
+    font-size: 2rem;
+    text-align: center;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #ccc;
+}
+
+main {
+    flex: 1;
+}
