@@ -13,45 +13,64 @@ class Task extends React.Component {
   }
 }
 
-class Tasks extends React.Component {
-  render() {
-    const { items } = this.props;
-    return (
-      <ul>
-        {items.map((task) => (
-          <Task key={task.id} summary={task.summary} done={task.done} />
-        ))}
-      </ul>
-    );
-  }
-}
-
 export class GoalItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.collapsibleItem = React.createRef();
+  }
+
   state = {
-    goalState: 'closed',
+    itemState: 'collapsed',
   };
 
   toggle = (event) => {
     event.preventDefault();
-    this.setState((currentState) => {
-      return {
-        goalState: currentState.goalState === 'closed' ? 'opened' : 'closed',
+    const element = this.collapsibleItem.current;
+
+    const collapse = () => {
+      const sectionHeight = element.scrollHeight;
+      const elementTransition = element.style.transition;
+      element.style.transition = '';
+      requestAnimationFrame(() => {
+        element.style.height = sectionHeight + 'px';
+        element.style.transition = elementTransition;
+        requestAnimationFrame(() => {
+          element.style.height = 0 + 'px';
+        });
+      });
+      this.setState({
+        itemState: 'collapsed',
+      });
+    };
+
+    const expand = () => {
+      const sectionHeight = element.scrollHeight;
+      element.style.height = sectionHeight + 'px';
+      const listener = () => {
+        element.removeEventListener('transitionend', listener);
       };
-    });
+      element.addEventListener('transitionend', listener);
+      this.setState({
+        itemState: 'expanded',
+      });
+    };
+    this.state.itemState === 'collapsed' ? expand() : collapse();
   };
 
   render() {
     const { title, active, items } = this.props;
     return (
-      <article className="goal-item" onClick={this.toggle}>
-        <p>
+      <article className="goal-item">
+        <p onClick={this.toggle}>
           <label>{title}</label>
           <button>{active ? 'Active' : 'Inactive'}</button>
           <button>...</button>
         </p>
-        <p className={this.state.goalState}>
-          {items.length > 0 && <Tasks items={items} />}
-        </p>
+        <ul ref={this.collapsibleItem} className={`items`}>
+          {items.map((task) => (
+            <Task key={task.id} summary={task.summary} done={task.done} />
+          ))}
+        </ul>
       </article>
     );
   }
