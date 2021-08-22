@@ -23,6 +23,14 @@ export class GoalItem extends React.Component {
     itemState: 'collapsed',
   };
 
+  onClickActiveButton = (event) => {
+    event.stopPropagation();
+  };
+
+  onClickOptions = (event) => {
+    event.stopPropagation();
+  }
+
   toggle = (event) => {
     event.preventDefault();
     const element = this.collapsibleItem.current;
@@ -46,14 +54,11 @@ export class GoalItem extends React.Component {
     const expand = () => {
       const sectionHeight = element.scrollHeight;
       element.style.height = sectionHeight + 'px';
-      const listener = () => {
-        element.removeEventListener('transitionend', listener);
-      };
-      element.addEventListener('transitionend', listener);
       this.setState({
         itemState: 'expanded',
       });
     };
+
     this.state.itemState === 'collapsed' ? expand() : collapse();
   };
 
@@ -63,8 +68,8 @@ export class GoalItem extends React.Component {
       <article className="goal-item">
         <p onClick={this.toggle}>
           <label>{title}</label>
-          <button>{active ? 'Active' : 'Inactive'}</button>
-          <button>...</button>
+          <button onClick={this.onClickActiveButton}>{active ? 'Active' : 'Inactive'}</button>
+          <button onClick={this.onClickOptions}>...</button>
         </p>
         <ul ref={this.collapsibleItem} className={`items`}>
           {items.map((task) => (
@@ -74,4 +79,5 @@ export class GoalItem extends React.Component {
       </article>
     );
   }
+
 }
