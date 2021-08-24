@@ -1,6 +1,13 @@
 fieldset {
     display: flex;
     align-items: center;
+    border: none;
+    background-color: #2A5D86;
+    height: 5em;
+    max-height: 5em;
+    margin: 0;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
 
 fieldset > span {
@@ -10,14 +17,18 @@ fieldset > span {
 .input-search {
     min-width: 2em;
     width: 100%;
-    margin-right: 2em;
+    margin-right: 1.5em;
     height: 2em;
-    margin-top: 0.5em;
-    border-color: lightgray;
-    border-style: solid;
-    border-width: thin;
+    background-color: #EFEFEF;
+    border: 0px solid;
+    padding: 4px;
 }
 
 .add-button {
-    margin-left: 2em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+    padding: 0;
 }

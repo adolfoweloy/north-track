@@ -12,8 +12,8 @@ article > p:first-child {
     align-items: center;
     min-height: 4em;
     padding: 0.5em;
-    border-bottom: 1px solid lightsteelblue;
-    background-color: lightsteelblue;
+    border-bottom: 1px solid #D6E0E8;
+    background-color: #D6E0E8;
 }
 
 article > p > label {
@@ -26,12 +26,21 @@ article > p > label {
     height:0;
     margin-top: 0;
     margin-bottom: 0;
+    padding-left: 1em;
 }
 
 .items > li {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
 }
+
+.items > li > label {
+    margin-left: 1em;
+}
+
 .closed {
     max-height: 0;
     margin-top: 0;

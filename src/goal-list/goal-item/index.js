@@ -1,12 +1,34 @@
 import React from 'react';
 import './style.css';
 
+class TaskStatus extends React.Component {
+  // status can be done or pending
+  state = {
+    status: 'pending'
+  }
+
+  render() {
+    return this.state.status === 'pending'
+    ? (<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="15" cy="15" r="14.5" fill="white" stroke="#85977A"/>
+      </svg>)
+      : (
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="15" cy="15" r="14.5" fill="white" stroke="#4C941F"/>
+        <path d="M7.67442 13.2021L13.7426 20.9302L23.0233 9.76744" stroke="#4C941F"/>
+      </svg>
+    )
+  }
+}
+
 class Task extends React.Component {
   render() {
     const { done, summary } = this.props;
     return (
       <li>
-        <label>{done ? 'Done' : 'Pending'}</label>
+        {
+          (<TaskStatus status={done ? 'done' : 'pending'}/>)
+        }
         <label>{summary}</label>
       </li>
     );
