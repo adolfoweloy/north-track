@@ -13,12 +13,12 @@ export class GoalList extends React.Component {
           {
             id: 1,
             summary: 'Render props',
-            done: true,
+            status: 'done',
           },
           {
             id: 2,
             summary: 'Forward ref',
-            done: false,
+            status: 'pending',
           },
         ],
       },
@@ -31,15 +31,37 @@ export class GoalList extends React.Component {
     ],
   };
 
+  toggleStatus = (status) => {
+    return status === 'pending' ? 'done' : 'pending';
+  };
+
+  changeGoal = (goal, taskId) => ({
+    ...goal,
+    items: goal.items.map((task) =>
+      task.id === taskId
+        ? { ...task, status: this.toggleStatus(task.status) }
+        : task
+    ),
+  });
+
+  onToggleTaskStatus = (goalId, taskId) =>
+    this.setState((currentState) => ({
+      items: currentState.items.map((goal) =>
+        goal.id === goalId ? this.changeGoal(goal, taskId) : goal
+      ),
+    }));
+
   render() {
     return (
       <section className="goal-list">
         {this.state.items.map((item) => (
           <GoalItem
             key={item.id}
+            id={item.id}
             title={item.title}
             active={item.active}
             items={item.items}
+            onToggleTaskStatus={this.onToggleTaskStatus}
           />
         ))}
       </section>
