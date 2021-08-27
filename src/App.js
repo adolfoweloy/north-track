@@ -1,11 +1,11 @@
 import './App.css';
-import { SearchBar } from './search-bar';
+import { QuickAddBar } from './quick-add-bar';
 import { GoalList } from './goal-list';
 
 function App() {
   return (
     <div className="main-content">
-      <SearchBar />
+      <QuickAddBar />
       <GoalList />
     </div>
   );

@@ -2,6 +2,8 @@ import React from 'react';
 import './style.css';
 import { ReactComponent as Pending } from './assets/pending.svg';
 import { ReactComponent as Done } from './assets/done.svg';
+import { ReactComponent as CollapsedGoalButton } from './assets/button-collapsed-goal.svg';
+import { ReactComponent as ExpandedGoalButton } from './assets/button-expanded-goal.svg';
 
 const TaskStatus = ({ status, onClick }) => {
   return status === 'pending' ? (
@@ -37,14 +39,6 @@ export class GoalItem extends React.Component {
     itemState: 'collapsed',
   };
 
-  onClickActiveButton = (event) => {
-    event.stopPropagation();
-  };
-
-  onClickOptions = (event) => {
-    event.stopPropagation();
-  };
-
   toggle = (event) => {
     event.preventDefault();
     const element = this.collapsibleItem.current;
@@ -77,15 +71,16 @@ export class GoalItem extends React.Component {
   };
 
   render() {
-    const { id, title, active, items, onToggleTaskStatus } = this.props;
+    const { id, title, items, onToggleTaskStatus } = this.props;
     return (
       <article className="goal-item">
         <p onClick={this.toggle}>
+          {this.state.itemState === 'collapsed' ? (
+            <CollapsedGoalButton />
+          ) : (
+            <ExpandedGoalButton />
+          )}
           <label>{title}</label>
-          <button onClick={this.onClickActiveButton}>
-            {active ? 'Active' : 'Inactive'}
-          </button>
-          <button onClick={this.onClickOptions}>...</button>
         </p>
         <ul ref={this.collapsibleItem} className={`items`}>
           {items.map((task) => (

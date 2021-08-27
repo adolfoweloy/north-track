@@ -25,10 +25,6 @@ fieldset > span {
 }
 
 .add-button {
-    background-color: transparent;
-    border: none;
     cursor: pointer;
-    display: inline;
-    margin: 0;
-    padding: 0;
 }
+
